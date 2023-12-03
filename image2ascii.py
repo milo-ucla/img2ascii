@@ -27,6 +27,7 @@ def scale_image(pixel_array, scale_factor: float):
     return resized_array
 
 
+#TODO - useful image enhancements
 def apply_image_filters(pixel_array, args):
     img = Image.fromarray(pixel_array)
     img = img.filter(ImageFilter.EDGE_ENHANCE_MORE)
@@ -115,10 +116,10 @@ def main() -> None:
                         help="add ANSI color to the characters", default=False)
     parser.add_argument("-o", "--omit-characters", action="store_true",
                         help="replace all ASCII characters with whitespace", default=False)
-    parser.add_argument("-d", "--edge-detection", action="store_true",
-                    help="use laplace edge detection filter on original image", default=False)
-    parser.add_argument("-e", "--edge-enhance", action="store_true",
-                        help="enhance edges and countours of the image", default=False)
+    # parser.add_argument("-d", "--edge-detection", action="store_true",
+    #                 help="use laplace edge detection filter on original image", default=False)
+    # parser.add_argument("-e", "--edge-enhance", action="store_true",
+    #                     help="enhance edges and countours of the image", default=False)
     # Parse the command-line arguments
     args = parser.parse_args()
     scale_factor = args.scale if args.scale else 1.0
@@ -127,7 +128,7 @@ def main() -> None:
     omit_ascii = args.omit_characters
     # Process the image
     pixel_array = get_pixel_array(args.image_path)
-    pixel_array = apply_image_filters(pixel_array, args)
+    # pixel_array = apply_image_filters(pixel_array, args)
     pixel_array = scale_image(pixel_array, scale_factor)
     ascii_text = convert_to_ascii(pixel_array)
     if (omit_ascii):
